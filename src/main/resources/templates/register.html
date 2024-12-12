@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration & Login</title>
+  <!-- Font Awesome link for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- External CSS file link -->
+<link rel="stylesheet" href="/regisstyle.css">
+</head>
+
+<body>
+<!-- Register Form -->
+  <div class="tab-content" id="register">
+    <h2>Register</h2>
+    <form th:action="registration" th:method="post" th:object="${user}">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input th:field="*{name}" type="text" placeholder="Username" required >
+      </div>
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input th:field="*{email}" type="email" placeholder="Email"  required>
+      </div>
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input th:field="*{password}" type="password" placeholder="Password"  required>
+      </div>
+
+      <p th:if="${message}" th:text="${message}"
+         th:classappend="${messageType == 'success' ? 'success' : 'error'}"></p>
+       <button type="submit">Register</button>
+      <p>Already have an account? <a href="login" data-tab="login" class="switch-tab">Log in here</a></p>
+    </form>
+  </div>
+</div>
+
+</body>
+
+</html>

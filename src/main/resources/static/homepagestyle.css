@@ -1,0 +1,359 @@
+
+
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #f0f2f5;
+    }
+
+    header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to right, #36D1DC, #5B86E5);
+  padding: 20px 0;
+  text-align: center;
+  color: white;
+  border-bottom: 5px solid #4CAF50;
+  z-index: 1000;
+}
+
+
+body {
+  margin-top: 80px;
+}
+
+
+ nav {
+      background-color: #333;
+      overflow: hidden;
+      padding: 10px 0;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 15px 30px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    nav a i {
+      margin-right: 8px;
+    }
+
+    nav a:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .section {
+      background-color: white;
+      padding: 30px;
+      margin-bottom: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      margin-bottom: 25px;
+      color: #36D1DC;
+      font-size: 1.8rem;
+      letter-spacing: 1.5px;
+    }
+
+    .dashboard {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .dashboard .card {
+      flex: 1;
+      background-color: #fff;
+      padding: 25px;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .dashboard .card:hover {
+      transform: scale(1.05);
+    }
+
+    .dashboard .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .dashboard .card p {
+      font-size: 1.6rem;
+      color: #36D1DC;
+    }
+
+    .dashboard .card i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #5B86E5;
+    }
+    .dashboard form{ color: black;}
+  /*chart*/
+    .chart-container {
+    margin-top: 100px;
+  }
+  .income-chart {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+}*/
+
+
+    .input-section label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .input-section input,
+    .input-section select,
+    .input-section button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .input-section input:focus,
+    .input-section select:focus {
+      border-color: #36D1DC;
+      box-shadow: 0 0 5px rgba(54, 209, 220, 0.5);
+    }
+
+    .input-section button {
+      background-color: #36D1DC;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      border: none;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .input-section button:hover {
+      background-color: #5B86E5;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #36D1DC;
+      text-decoration: none;
+      margin-left: 5px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 300px;
+      width: 100%;
+    }
+
+    .setting-option {
+      margin-bottom: 20px;
+    }
+
+    .setting-option label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .setting-option select,
+    .setting-option input {
+      width: 100%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .setting-option input[type="checkbox"] {
+      width: auto;
+    }
+
+    .section {
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    /* General Section Styling */
+    .section {
+      margin: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    /* Financial Goal and Budget Styles */
+    .financial-goal,
+    .budget {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 1rem;
+      margin-top: 8px;
+      color: #333;
+    }
+
+    #goal-status,
+    #remaining-budget {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    /* Report Table Styles */
+    #report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    #report-table th,
+    #report-table td {
+      padding: 12px;
+      text-align: left;
+      font-size: 1rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    #report-table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    #report-table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    /* Download Button */
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .section {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      input[type="number"],
+      button {
+        width: 100%;
+        font-size: 1rem;
+      }
+
+      #report-table th,
+      #report-table td {
+        font-size: 0.9rem;
+        padding: 8px;
+      }
+
+      #report-table {
+        font-size: 0.9rem;
+      }
+    }
+
+    .setting-option label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .setting-option i {
+      color: #555;
+    }

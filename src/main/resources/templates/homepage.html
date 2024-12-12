@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Personal Money Management</title>
+    <link rel="stylesheet" href="/homepagestyle.css">
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Chart.js CDN for Graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<!-- Header -->
+<header>
+    <h1>Advanced Personal Money Management</h1>
+</header>
+
+<!-- Navigation Bar -->
+<nav>
+    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+    <a href="incomexpens.html"><i class="fas fa-wallet"></i>Income & Expense</a>
+    <a href="BUDGET.HTML"><i class="fas fa-file-invoice-dollar"></i>Budget Planner</a>
+    <a href="goal.html"><i class="fas fa-bullseye"></i>Financial Goals</a>
+    <a href="report.html"><i class="fas fa-chart-bar"></i>Reports</a>
+    <a href="settings.html"><i class="fas fa-cog"></i>Settings</a>
+</nav>
+
+<!-- Main Content -->
+<div class="container">
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <h2>Dashboard Overview</h2>
+        <div class="dashboard">
+            <div class="card">
+                <i class="fas fa-coins"></i>
+                <h3>Total Income</h3>
+                <p id="total-income">৳0</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-credit-card"></i>
+                <h3>Total Expenses</h3>
+                <p id="total-expenses">৳0</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-piggy-bank"></i>
+                <h3>Current Savings</h3>
+                <p id="current-savings">৳0</p>
+            </div>
+            <!--chart-->
+        </div>
+        <div class="chart-container income-chart">
+            <canvas id="income-expense-savings-chart"></canvas>
+        </div>
+
+    </section>
+    <!-- Income & Expense Section -->
+    <section id="income-expense" class="section input-section">
+        <h2>Income & Expense Tracker</h2>
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+
+        <label for="type">Type</label>
+        <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+
+        <label for="category">Category</label>
+        <select id="category">
+            <option value="salary">Salary</option>
+            <option value="groceries">Groceries</option>
+            <option value="transport">Transport</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="others">Others</option>
+        </select>
+
+        <label for="date">Date</label>
+        <input type="date" id="date">
+
+        <button onclick="addTransaction()">Add Transaction</button>
+    </section>
+
+    <!-- Reports Section -->
+    <!-- Reports Section -->
+    <section id="reports" class="section">
+        <h2>Generated Report</h2>
+        <div>
+            <!-- Financial Goal, Budget and Remaining Budget -->
+            <div class="financial-goal">
+                <label for="financial-goal">Set Financial Goal (in Currency): </label>
+                <input type="number" id="financial-goal" placeholder="Enter your goal" onchange="updateGoal()">
+                <p id="goal-status">Goal Status: Not Set</p>
+            </div>
+
+            <div class="budget">
+                <label for="budget">Set Monthly Budget: </label>
+                <input type="number" id="budget" placeholder="Enter your budget" onchange="updateBudget()">
+                <p id="remaining-budget">Remaining Budget: Not Set</p>
+            </div>
+
+            <!-- Report Table -->
+            <table id="report-table" border="1" cellpadding="8" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody id="report-table-body">
+                <tr>
+                    <td colspan="4" style="text-align: center;">No transactions added yet.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <button onclick="downloadReport()">Download Report</button>
+    </section>
+
+
+    <!-- Settings Section -->
+    <section id="settings" class="section">
+        <h2>Settings</h2>
+        <p>Manage your account settings and preferences here.</p>
+
+        <!-- Currency Selection -->
+        <div class="setting-option">
+            <label for="currency"><i class="fas fa-money-bill"></i> Select Currency</label>
+            <select id="currency" onchange="changeCurrency()">
+                <option value="TAKA">৳ TAKA</option>
+                <option value="USD">$ USD</option>
+                <option value="EUR">€ EUR</option>
+                <option value="INR">₹ INR</option>
+                <option value="GBP">£ GBP</option>
+            </select>
+        </div>
+
+        <!-- Theme Selection -->
+        <div class="setting-option">
+            <label for="theme"><i class="fas fa-palette"></i> Choose Theme</label>
+            <select id="theme" onchange="changeTheme()">
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </div>
+
+        <!-- Notification Preference -->
+        <div class="setting-option">
+            <label for="notifications"><i class="fas fa-bell"></i> Enable Notifications</label>
+            <input type="checkbox" id="notifications" onchange="toggleNotifications()">
+        </div>
+
+        <!-- Language Selection -->
+        <div class="setting-option">
+            <label for="language"><i class="fas fa-language"></i> Preferred Language</label>
+            <select id="language" onchange="changeLanguage()">
+                <option value="en">English</option>
+                <option value="bn">বাংলা (Bangla)</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <p> Personal Finance Tracker. Designed 💙 by Md Mahfuzur Rahman <a href="#">Your Name</a></p>
+</footer>
+<script src="/homepagestrip.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,161 @@
+* {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to right, #36D1DC, #5B86E5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 400px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Tab Header */
+    .tab-header {
+      display: flex;
+      background: linear-gradient(to right, #5B86E5, #36D1DC);
+    }
+
+    .tab-header div {
+      flex: 1;
+      text-align: center;
+      padding: 15px 20px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .tab-header .active {
+      background: white;
+      color: #5B86E5;
+      border-radius: 15px 15px 0 0;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+      padding: 40px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .tab-content active submit a{
+      text-decoration: none;
+    }
+
+    /* Form Heading */
+    .tab-content h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #5B86E5;
+      font-size: 1.8rem;
+    }
+
+    /* Input Group */
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 50px; /* Updated padding for icons */
+      border: 1px solid #ccc;
+      border-radius: 30px;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: #5B86E5;
+      box-shadow: 0 0 8px rgba(91, 134, 229, 0.5);
+    }
+
+    .input-group i {
+      position: absolute;
+      top: 50%;
+      left: 15px; /* Icon Position */
+      transform: translateY(-50%);
+      color: #5B86E5;
+      font-size: 1.2rem;
+      pointer-events: none; /* Prevent clicking on icons */
+    }
+
+    /* Button Styling */
+    .tab-content button {
+      background: linear-gradient(to right, #5B86E5, #36D1DC);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      width: 100%;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .tab-content button:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(to right, #36D1DC, #5B86E5);
+    }
+
+    /* Footer Text */
+    .tab-content p {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .tab-content p a {
+      color: #5B86E5;
+      text-decoration: none;
+    }
+
+    .tab-content p a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 420px) {
+      .container {
+        width: 100%;
+        margin: 10px;
+      }
+
+      .tab-header div {
+        font-size: 1rem;
+        padding: 10px;
+      }
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }

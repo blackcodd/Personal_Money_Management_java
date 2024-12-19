@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -34,6 +34,10 @@
 <!-- Main Content -->
 <div class="container">
 
+    <input type="hidden" id="logged-in-user-id" th:value="${user_id}"/>
+    <p> userid:<span th:text="${user_id}"></span></p>
+
+
     <!-- Dashboard Section -->
     <section id="dashboard" class="section">
         <h2>Dashboard Overview</h2>
@@ -41,17 +45,17 @@
             <div class="card">
                 <i class="fas fa-coins"></i>
                 <h3>Total Income</h3>
-                <p id="total-income">৳0</p>
+                <p id="total-income">৳<span th:text="${totalincome}"></span></p>
             </div>
             <div class="card">
                 <i class="fas fa-credit-card"></i>
                 <h3>Total Expenses</h3>
-                <p id="total-expenses">৳0</p>
+                <p id="total-expenses">৳<span th:text="${totalexpense}"></span></p>
             </div>
             <div class="card">
                 <i class="fas fa-piggy-bank"></i>
                 <h3>Current Savings</h3>
-                <p id="current-savings">৳0</p>
+                <p id="current-savings">৳<span th:text="${savings}"> </span></p>
             </div>
             <!--chart-->
         </div>
@@ -63,6 +67,7 @@
     <!-- Income & Expense Section -->
     <section id="income-expense" class="section input-section">
         <h2>Income & Expense Tracker</h2>
+        <form onsubmit="addTransaction(); return false;">
         <label for="amount">Amount</label>
         <input type="number" id="amount" placeholder="Enter amount">
 
@@ -71,20 +76,31 @@
             <option value="income">Income</option>
             <option value="expense">Expense</option>
         </select>
+        <label for="media">Media</label>
+        <select id="media">
+            <option value="bkash">Bkash</option>
+            <option value="nagad">Nagad</option>
+            <option value="cash">Cash</option>
+            <option value="bank">Bank</option>
+            <option value="other">Other</option>
+        </select>
 
         <label for="category">Category</label>
         <select id="category">
             <option value="salary">Salary</option>
+            <option value="business_profit">Business_Profit</option>
+            <option value="business_loss">Business_loss</option>
+            <option value="entertainment">Entertainment</option>
             <option value="groceries">Groceries</option>
             <option value="transport">Transport</option>
-            <option value="entertainment">Entertainment</option>
             <option value="others">Others</option>
         </select>
 
         <label for="date">Date</label>
         <input type="date" id="date">
 
-        <button onclick="addTransaction()">Add Transaction</button>
+        <button>Add Transaction</button>
+        </form>
     </section>
 
     <!-- Reports Section -->
@@ -177,7 +193,50 @@
 <footer>
     <p> Personal Finance Tracker. Designed 💙 by Md Mahfuzur Rahman <a href="#">Your Name</a></p>
 </footer>
-<script src="/homepagestrip.js"></script>
+<script >
+
+    function addTransaction() {
+
+    var amount = document.getElementById("amount").value;
+    var type = document.getElementById("type").value;
+    var media = document.getElementById("media").value;
+    var category = document.getElementById("category").value;
+    var date = document.getElementById("date").value;
+    var userId=document.getElementById("logged-in-user-id").value;
+
+    var transaction = {
+        amount: amount,
+        media: media,
+        category: category,
+        date: date
+    };
+
+    var url = (type === "income") ? `/api/incomes?userId=${userId}` : `/api/expenses?userId=${userId}`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transaction),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert(type.charAt(0).toUpperCase() + type.slice(1) + " added successfully!");
+    })
+    .catch((error) => {
+        console.error('There was a problem with your fetch operation:', error);
+    });
+    }
+
+
+</script>
+
 </body>
 
 </html>

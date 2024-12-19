@@ -29,7 +29,9 @@ public class logincontroller {
         user autonicateUser = userservice.log(user.getName(), user.getPassword());
         System.out.print(autonicateUser);
         if (Objects.nonNull(autonicateUser)) {
-            return "redirect:/homepage";
+            model.addAttribute("user_id",autonicateUser.getId());
+            return "redirect:/homepage?user_id="+autonicateUser.getId();
+
         } else {
              model.addAttribute("message","Wrong username or password");
                return "login";

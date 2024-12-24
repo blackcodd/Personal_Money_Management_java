@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.Model.expense;
 import com.example.Model.income;
 import com.example.Model.user;
 import com.example.repositories.IncomeRepository;
@@ -20,11 +21,11 @@ public class IncomeService {
     public Long getTotalincome(long user_id){
         return incomeRepository.getTotalincomebyId(user_id);
     }
+    public List<income> allincome(long user_id) { return incomeRepository.allincome(user_id);}
 
     public List<income> getAllIncomes() {
         return incomeRepository.findAll();
     }
-
     public income saveIncome(income income, long userId) {
         user user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
         income.setUser(user);

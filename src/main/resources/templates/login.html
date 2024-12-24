@@ -13,14 +13,14 @@
 <div class="container">
   <div class="tab-content">
     <h2>Login</h2>
-    <form th:action="@{/login}" th:object="${user}" method="post">
+    <form id="loginForm" th:action="@{/login}" th:object="${user}" method="post">
       <div class="input-group">
         <i class="fas fa-user"></i>
-        <input type="text" th:field="*{name}" placeholder="Username" required>
+        <input type="text" id="name" th:field="*{name}" placeholder="Username" required>
       </div>
       <div class="input-group">
         <i class="fas fa-lock"></i>
-        <input type="password" th:field="*{password}" placeholder="Password" required>
+        <input type="password" id="password" th:field="*{password}" placeholder="Password" required>
       </div>
       <p th:if="${message}" th:text="${message}"> </p>
       <button type="submit">Login</button>

@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.example.Model.ExpenseDTO;
 import com.example.Model.expense;
 import com.example.Model.user;
 import com.example.repositories.ExpenseRepository;
@@ -16,17 +17,13 @@ public class ExpenseService {
 
     @Autowired
     private UserRepository userRepository;
-
-    public List<expense> getAllExpenses() {
-        return expenseRepository.findAll();
-    }
-    public  Long getTotalexpence(long user_id){
+    public Long  getTotalexpence(long user_id){
         return expenseRepository.gettotalexpence(user_id);
     }
+    public List<expense> allexpense(long user_id) { return expenseRepository.allexpense(user_id);}
 
     public expense saveExpense(expense expense, long userId) {
         user user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-
         System.out.println("Saving Expense: " + expense);
         expense.setUser(user);
         return expenseRepository.save(expense);

@@ -17,10 +17,7 @@ public class ExpenseControler {
     @Autowired
     public UserRepository userRepository;
 
-    @GetMapping
-    public List<expense> getAllExpenses() {
-        return expenseService.getAllExpenses();
-    }
+
 
     @PostMapping
     public expense saveExpense(@RequestBody expense expense, @RequestParam long userId) {

@@ -22,7 +22,9 @@ public interface ExpenseRepository extends JpaRepository<expense, Long> {
      @Query(nativeQuery = true,value = "SELECT SUM(amount) FROM expense  WHERE user_id = :user_id AND YEAR(date) = :year AND MONTH(date) = :month")
      Long findTotalExpenseByUserIdAndYearAndMonth(@Param("user_id") long user_id, @Param("year") int year, @Param("month") int month);
      @Query(nativeQuery = true,value = "SELECT SUM(amount) FROM expense WHERE user_id = :user_id AND YEAR(date) = :year AND MONTH(date) = :month AND DAY(date) = :date")
-     Long findTotalExpenseByUserIdAndYearAndMonthAndDate(@Param("user_id") long userId, @Param("year") int year, @Param("month") int month, @Param("date") int date);
+     Long findTotalExpenseByUserIdAndYearAndMonthAndDate(@Param("user_id") long user_id, @Param("year") int year, @Param("month") int month, @Param("date") int date);
+     @Query(nativeQuery = true,value = "SELECT SUM(amount) FROM expense WHERE user_id = :user_id AND YEAR(date) = :year")
+     Long fidTotalExpenseByUserIdandYear(@Param("user_id") long user_id,@Param("year") int year);
      @Query(nativeQuery = true, value = """
     SELECT 
         category, 

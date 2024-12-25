@@ -30,6 +30,7 @@ public class ExpenseService {
          if (year != null && month != null && date != null)
          { return expenseRepository.findTotalExpenseByUserIdAndYearAndMonthAndDate(user_id, year, month, date); }
          else if (year != null && month != null) { return expenseRepository.findTotalExpenseByUserIdAndYearAndMonth(user_id, year, month); }
+         else if(year!=null) { return  expenseRepository.fidTotalExpenseByUserIdandYear(user_id,year);}
          else { return expenseRepository.findTotalExpenseByUserId(user_id); }
      }
     public Map<String, Double> getpieTotalExpense(long user_id, Integer year, Integer month, Integer date)

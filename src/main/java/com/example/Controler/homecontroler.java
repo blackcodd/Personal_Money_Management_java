@@ -93,7 +93,7 @@ public class homecontroler {
             System.out.println(now);
             if(year==null){
             year = now.minusMonths(0).getYear();}
-            if(month==null){
+            if(month==null && year==null){
             month = now.minusMonths(0).getMonthValue();}
             System.out.println(year);
             System.out.println(month);

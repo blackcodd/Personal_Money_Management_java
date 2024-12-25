@@ -14,7 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class homecontroler {
@@ -77,9 +80,57 @@ public class homecontroler {
         List<ExpenseDTO> filteredTransactions = transactionRepository.filterTransactions(user_id, year, month, date);
         return ResponseEntity.ok(filteredTransactions);
     }
+    @GetMapping("/dashboardData")
+    public ResponseEntity<Map<String, Long>> getDashboardData(
+            @RequestParam long user_id,
+            @RequestParam(required = false) Integer year,
+            @RequestParam(required = false) Integer month,
+            @RequestParam(required = false) Integer date) {
 
+        // Set default values for the last month if not provided
+        if (year == null || month == null) {
+            LocalDate now = LocalDate.now();
+            System.out.println(now);
+            if(year==null){
+            year = now.minusMonths(0).getYear();}
+            if(month==null){
+            month = now.minusMonths(0).getMonthValue();}
+            System.out.println(year);
+            System.out.println(month);
+        }
+        Long totalIncome = incomeService.getTotalIncome(user_id, year, month, date);
+        Long totalExpense = expenseService.getTotalExpense(user_id, year, month, date);
+        totalIncome = (totalIncome == null) ? 0L : totalIncome;
+        totalExpense = (totalExpense == null) ? 0L : totalExpense;
+        Long savings = totalIncome - totalExpense;
 
+        Map<String, Long> data = new HashMap<>();
+        data.put("totalIncome", totalIncome);
+        data.put("totalExpenses", totalExpense);
+        data.put("savings", savings);
 
+        return ResponseEntity.ok(data);
+    }
+    @GetMapping("/expenseCategoryData")
+    public ResponseEntity<Map<String, Double>> getExpenseCategoryData(
+            @RequestParam long user_id,
+            @RequestParam(required = false) Integer year,
+            @RequestParam(required = false) Integer month,
+            @RequestParam(required = false) Integer date)
+     {
+         if (year == null || month == null) {
+             LocalDate now = LocalDate.now();
+             System.out.println(now);
+             if(year==null){
+                 year = now.minusMonths(0).getYear();}
+             if(month==null){
+                 month = now.minusMonths(0).getMonthValue();}
+             System.out.println(year);
+             System.out.println(month);
+         }
+         Map<String, Double> categoryData = expenseService.getpieTotalExpense(user_id, year, month, date);
+         return ResponseEntity.ok(categoryData);
+     }
 
 
 }

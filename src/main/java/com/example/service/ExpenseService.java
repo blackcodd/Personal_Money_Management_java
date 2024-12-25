@@ -8,7 +8,9 @@ import com.example.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ExpenseService {
@@ -20,7 +22,31 @@ public class ExpenseService {
     public Long  getTotalexpence(long user_id){
         return expenseRepository.gettotalexpence(user_id);
     }
+
     public List<expense> allexpense(long user_id) { return expenseRepository.allexpense(user_id);}
+
+     public Long getTotalExpense(long user_id, Integer year, Integer month, Integer date)
+     {
+         if (year != null && month != null && date != null)
+         { return expenseRepository.findTotalExpenseByUserIdAndYearAndMonthAndDate(user_id, year, month, date); }
+         else if (year != null && month != null) { return expenseRepository.findTotalExpenseByUserIdAndYearAndMonth(user_id, year, month); }
+         else { return expenseRepository.findTotalExpenseByUserId(user_id); }
+     }
+    public Map<String, Double> getpieTotalExpense(long user_id, Integer year, Integer month, Integer date)
+    {
+        List<Object[]> results;
+        if (year != null && month != null && date != null)
+        {results=expenseRepository.findCategoryAndPercentageByUserIdAndYearAndMonthAndDate(user_id, year, month, date);}
+        else if (year != null && month != null) { results=expenseRepository.findCategoryAndPercentageByUserIdAndYearAndMonth(user_id, year, month); }
+        else { results=expenseRepository.findCategoryAndPercentageByUserId(user_id); }
+        Map<String, Double> categoryPercentageMap = new HashMap<>();
+        for (Object[] result : results)
+        { String category = (String) result[0];
+            Double percentage = (Double) result[2];
+            categoryPercentageMap.put(category, percentage);
+        }
+        return  categoryPercentageMap;
+    }
 
     public expense saveExpense(expense expense, long userId) {
         user user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));

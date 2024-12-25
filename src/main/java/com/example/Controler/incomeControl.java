@@ -17,11 +17,6 @@ public class incomeControl {
     private IncomeService incomeService;
     @Autowired
     public UserRepository userRepository;
-    @GetMapping
-    public List<income> getAllIncomes() {
-        return incomeService.getAllIncomes();
-    }
-
 
     @PostMapping
     public income saveincome(@RequestBody income income, @RequestParam long userId) {

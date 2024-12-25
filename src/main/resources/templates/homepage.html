@@ -41,25 +41,33 @@
             <div class="card">
                 <i class="fas fa-coins"></i>
                 <h3>Total Income</h3>
-                <p id="total-income">৳<span th:text="${totalincome}"></span></p>
+                <p id="total-income"></p>
             </div>
             <div class="card">
                 <i class="fas fa-credit-card"></i>
                 <h3>Total Expenses</h3>
-                <p id="total-expenses">৳<span th:text="${totalexpense}"></span></p>
+                <p id="total-expenses"></p>
             </div>
             <div class="card">
                 <i class="fas fa-piggy-bank"></i>
                 <h3>Current Savings</h3>
-                <p id="current-savings">৳<span th:text="${savings}"> </span></p>
+                <p id="current-savings"></p>
             </div>
             <!--chart-->
         </div>
         <div class="chart-container income-chart">
             <canvas id="income-expense-savings-chart"></canvas>
         </div>
-
+        <div class="filter">
+            <label for="filter-year">Year: </label>
+            <input type="number" id="Dasboard-filter-year" placeholder="YYYY" oninput="filterDashboard()">
+            <label for="filter-month">Month: </label>
+            <input type="number" id="Dasboard-filter-month" placeholder="MM" oninput="filterDashboard()">
+            <label for="filter-date">Date: </label>
+            <input type="number" id="Dasboard-filter-date" placeholder="DD" oninput="filterDashboard()">
+        </div>
     </section>
+
     <!-- Income & Expense Section -->
     <section id="income-expense" class="section input-section">
         <h2>Income & Expense Tracker</h2>
@@ -198,6 +206,7 @@
 </footer>
 
 <script src="/Home.js"></script>
+<script src="/chart.js"></script>
 <script src="/filter.js"> </script>
 <!--<script src="../static/Home.js"></script>-->
 

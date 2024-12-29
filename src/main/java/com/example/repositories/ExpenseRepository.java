@@ -11,21 +11,8 @@ import java.util.List;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<expense, Long> {
-     @Query(nativeQuery = true,value="select  COALESCE(sum(amount), 0) from expense where user_id=:user_id ")
-     Long  gettotalexpence(@Param("user_id") long user_id);
-
-     @Query(nativeQuery = true,value = "select * from expense where user_id=:user_id")
-     List<expense> allexpense(@Param("user_id") long user_id);
-
-     @Query(nativeQuery = true,value = "SELECT SUM(amount) FROM expense WHERE user_id = :user_id")
-     Long findTotalExpenseByUserId(@Param("user_id") long user_id);
-     @Query(nativeQuery = true,value = "SELECT SUM(amount) FROM expense  WHERE user_id = :user_id AND YEAR(date) = :year AND MONTH(date) = :month")
-     Long findTotalExpenseByUserIdAndYearAndMonth(@Param("user_id") long user_id, @Param("year") int year, @Param("month") int month);
-     @Query(nativeQuery = true,value = "SELECT SUM(amount) FROM expense WHERE user_id = :user_id AND YEAR(date) = :year AND MONTH(date) = :month AND DAY(date) = :date")
-     Long findTotalExpenseByUserIdAndYearAndMonthAndDate(@Param("user_id") long user_id, @Param("year") int year, @Param("month") int month, @Param("date") int date);
      @Query(nativeQuery = true,value = "SELECT SUM(amount) FROM expense WHERE user_id = :user_id AND YEAR(date) = :year")
-     Long fidTotalExpenseByUserIdandYear(@Param("user_id") long user_id,@Param("year") int year);
-     @Query(nativeQuery = true, value = """
+     Long fidTotalExpenseByUserIdandYear(@Param("user_id") long user_id,@Param("year") int year);@Query(nativeQuery = true, value = """
     SELECT 
         category, 
         SUM(amount) AS total_amount, 
@@ -80,7 +67,7 @@ public interface ExpenseRepository extends JpaRepository<expense, Long> {
         category
 """)
      List<Object[]> findCategoryAndPercentageByUserIdAndYearAndMonthAndDate(
-             @Param("user_id") long userId,
+             @Param("user_id") long user_id,
              @Param("year") int year,
              @Param("month") int month,
              @Param("date") int date

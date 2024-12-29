@@ -20,7 +20,7 @@ public class logincontroller {
     @Autowired
     private loginservice userservice;
 
-    @GetMapping("/login")
+    @GetMapping()
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView("login");
         mav.addObject("user", new user());
@@ -42,7 +42,7 @@ public class logincontroller {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-    @PostMapping("/login")
+    @PostMapping ("/login")
     public String login(@ModelAttribute("user") user user, Model model) {
         user autonicateUser = userservice.log(user.getName(), user.getPassword());
 

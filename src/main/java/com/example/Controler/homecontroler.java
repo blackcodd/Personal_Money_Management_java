@@ -1,11 +1,14 @@
 package com.example.Controler;
 
+import com.example.Model.CategoryPercentageDTO;
 import com.example.Model.ExpenseDTO;
+import com.example.Model.IncomeExpenseDTO;
 import com.example.Model.user;
 import com.example.repositories.TransactionRepository;
 import com.example.repositories.UserRepository;
 import com.example.service.ExpenseService;
 import com.example.service.IncomeService;
+import com.example.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,12 +38,12 @@ public class homecontroler {
         try {
             model.addAttribute("user_id",user_id);
 
-             Long totalincome = incomeService.getTotalincome(user_id);
-            Long totalexpence=expenseService.getTotalexpence(user_id);
-            Long saving=totalincome-totalexpence;
-            model.addAttribute("totalexpense",totalexpence);
-            model.addAttribute("totalincome", totalincome);
-            model.addAttribute("savings", saving);
+           //  Long totalincome = incomeService.getTotalincome(user_id);
+           // Long totalexpence=expenseService.getTotalexpence(user_id);
+           // Long saving=totalincome-totalexpence;
+           // model.addAttribute("totalexpense",totalexpence);
+           // model.addAttribute("totalincome", totalincome);
+            //model.addAttribute("savings", saving);
             List<ExpenseDTO>Table_list=transactionRepository.getAllTransactionsByUserId(user_id);
          //    model.addAttribute("Transaction",Table_list);
 
@@ -80,57 +83,29 @@ public class homecontroler {
         List<ExpenseDTO> filteredTransactions = transactionRepository.filterTransactions(user_id, year, month, date);
         return ResponseEntity.ok(filteredTransactions);
     }
-    @GetMapping("/dashboardData")
-    public ResponseEntity<Map<String, Long>> getDashboardData(
+
+
+    @Autowired
+    private TransactionService transactionService;
+
+    @GetMapping("/totals")
+    public ResponseEntity<IncomeExpenseDTO> getTotals(
             @RequestParam long user_id,
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) Integer month,
             @RequestParam(required = false) Integer date) {
-
-        // Set default values for the last month if not provided
-        if (year == null || month == null) {
-            LocalDate now = LocalDate.now();
-            System.out.println(now);
-            if(year==null){
-            year = now.minusMonths(0).getYear();}
-            if(month==null && year==null){
-            month = now.minusMonths(0).getMonthValue();}
-            System.out.println(year);
-            System.out.println(month);
-        }
-        Long totalIncome = incomeService.getTotalIncome(user_id, year, month, date);
-        Long totalExpense = expenseService.getTotalExpense(user_id, year, month, date);
-        totalIncome = (totalIncome == null) ? 0L : totalIncome;
-        totalExpense = (totalExpense == null) ? 0L : totalExpense;
-        Long savings = totalIncome - totalExpense;
-
-        Map<String, Long> data = new HashMap<>();
-        data.put("totalIncome", totalIncome);
-        data.put("totalExpenses", totalExpense);
-        data.put("savings", savings);
-
-        return ResponseEntity.ok(data);
+        IncomeExpenseDTO incomeExpenseDTO=transactionService.calculateTotals(user_id, year, month, date);
+        return ResponseEntity.ok(incomeExpenseDTO);
     }
-    @GetMapping("/expenseCategoryData")
-    public ResponseEntity<Map<String, Double>> getExpenseCategoryData(
+    @GetMapping("/category-percentages")
+    public ResponseEntity<List<CategoryPercentageDTO>> getCategoryPercentages(
             @RequestParam long user_id,
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) Integer month,
-            @RequestParam(required = false) Integer date)
-     {
-         if (year == null || month == null) {
-             LocalDate now = LocalDate.now();
-             System.out.println(now);
-             if(year==null){
-                 year = now.minusMonths(0).getYear();}
-             if(month==null){
-                 month = now.minusMonths(0).getMonthValue();}
-             System.out.println(year);
-             System.out.println(month);
-         }
-         Map<String, Double> categoryData = expenseService.getpieTotalExpense(user_id, year, month, date);
-         return ResponseEntity.ok(categoryData);
-     }
+            @RequestParam(required = false) Integer date) {
+        List<CategoryPercentageDTO> percentages = transactionService.getCategoryBreakdown(user_id, year, month, date);
+        return ResponseEntity.ok(percentages);
+    }
 
 
 }

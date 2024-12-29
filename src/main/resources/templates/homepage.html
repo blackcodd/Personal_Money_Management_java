@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Chart.js CDN for Graphs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
 <!-- Header -->
@@ -57,14 +58,22 @@
         </div>
         <div class="chart-container income-chart">
             <canvas id="income-expense-savings-chart"></canvas>
+
         </div>
+        <div>
+            <h3>Income Breakdown</h3>
+            <canvas id="incomeChart" width="200" height="200"></canvas>
+            <h3>Expense Breakdown</h3>
+            <canvas id="expenseChart" width="200" height="200"></canvas>
+        </div>
+
         <div class="filter">
             <label for="filter-year">Year: </label>
-            <input type="number" id="Dasboard-filter-year" placeholder="YYYY" oninput="filterDashboard()">
+            <input type="number" id="Dasboard-filter-year" placeholder="YYYY" oninput="filterDashboard()" >
             <label for="filter-month">Month: </label>
-            <input type="number" id="Dasboard-filter-month" placeholder="MM" oninput="filterDashboard()">
+            <input type="number" id="Dasboard-filter-month" placeholder="MM" oninput="filterDashboard()" >
             <label for="filter-date">Date: </label>
-            <input type="number" id="Dasboard-filter-date" placeholder="DD" oninput="filterDashboard()">
+            <input type="number" id="Dasboard-filter-date" placeholder="DD" oninput="filterDashboard()" >
         </div>
     </section>
 

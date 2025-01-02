@@ -1,8 +1,9 @@
-//   const userId = [[${user_id}]]; // Default to '0' if not set
-//        console.log( userId);
+     // const userId = [[${user_id}]]; // Default to '0' if not set
+     //  console.log( userId);
        var userId = document.getElementById("logged-in-user-id").value;
-        console.log(`UserId: ${userId}`);
-        document.addEventListener('DOMContentLoaded', function() { loadAllTransactions(); });
+      console.log(`UserId: ${userId}`);
+
+      document.addEventListener('DOMContentLoaded', function() { loadAllTransactions(); });
         function loadAllTransactions()
          { fetch(`/filterTransactions?user_id=${userId}`)
           .then(response => response.json())
@@ -20,6 +21,20 @@
               })
               .catch((error) => { console.error('There was a problem with your fetch operation:', error); });
               }
+               function showFilters() {
+                          const filters = document.getElementById('filters');
+                          const submitBtn = document.getElementById('submit-btn');
+                          filters.style.display = 'flex';
+                          submitBtn.style.display = 'block';
+                      }
+
+                       function TshowFilters() {
+                                                const Tfilters = document.getElementById('table-filters');
+                                                const TsubmitBtn = document.getElementById('Tsubmit-btn');
+                                                Tfilters.style.display = 'flex';
+                                                TsubmitBtn.style.display = 'block';
+                                            }
+
 
 
         function filterTable(){
@@ -45,3 +60,12 @@
                     });
                 });
         }
+
+
+
+
+
+
+
+
+

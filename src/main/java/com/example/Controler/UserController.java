@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
     @Autowired
     UserRepository userRepository;
-    @GetMapping("/registration")
-    public  String getRegPage(Model model){
-        model.addAttribute("user",new user());
-        return "register";
-    }
+//    @GetMapping()
+//    public  String getRegPage(Model model){
+//        model.addAttribute("user",new user());
+//        return "Mlogin";
+//    }
     @PostMapping("/registration")
     public  String saveUser(@ModelAttribute("user") user U, Model model){
         try {
             userRepository.save(U);
             model.addAttribute("message","User successfully saved");
             model.addAttribute("messageType","success");
-            return "login";
+            return "Mlogin";
         }
         catch (Exception e){
             model.addAttribute("message","ERROR"+e.getMessage());
             model.addAttribute("messageType","error");
-            return "registration";
+            return "Mlogin";
         }
 
 

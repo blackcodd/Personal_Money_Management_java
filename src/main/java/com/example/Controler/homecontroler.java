@@ -37,23 +37,12 @@ public class homecontroler {
     public String getRegPage( @RequestParam long user_id, Model model) {
         try {
             model.addAttribute("user_id",user_id);
-
-           //  Long totalincome = incomeService.getTotalincome(user_id);
-           // Long totalexpence=expenseService.getTotalexpence(user_id);
-           // Long saving=totalincome-totalexpence;
-           // model.addAttribute("totalexpense",totalexpence);
-           // model.addAttribute("totalincome", totalincome);
-            //model.addAttribute("savings", saving);
             List<ExpenseDTO>Table_list=transactionRepository.getAllTransactionsByUserId(user_id);
-         //    model.addAttribute("Transaction",Table_list);
-
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
-
-
-       model.addAttribute("user", new user());
+        model.addAttribute("user", new user());
         return "homepage";
     }
     @GetMapping("/allTransaction")

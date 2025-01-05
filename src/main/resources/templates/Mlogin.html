@@ -41,7 +41,9 @@
         <form th:action="@{/registration}"  th:method="post" th:object="${user}">
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input th:field="*{name}" type="text" name="username" placeholder="Username" required>
+
+                <input th:field="*{name}" type="text" name="name" placeholder="Username" required>
+
             </div>
             <div class="input-group">
                 <i class="fas fa-envelope"></i>

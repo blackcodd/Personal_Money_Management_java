@@ -8,6 +8,7 @@ import com.example.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,5 +42,10 @@ public class ExpenseService {
         System.out.println("Saving Expense: " + expense);
         expense.setUser(user);
         return expenseRepository.save(expense);
+    }
+    public double calculateTotalExpense(long userId, String startDate, String endDate) {
+        // Fetch total expense from the repository
+        return expenseRepository.findTotalExpenseByUserAndDateRange(userId, startDate, endDate)
+                .orElse(0.0);
     }
 }

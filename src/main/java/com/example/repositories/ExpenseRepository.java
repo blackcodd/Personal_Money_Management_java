@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ExpenseRepository extends JpaRepository<expense, Long> {
@@ -72,6 +74,12 @@ public interface ExpenseRepository extends JpaRepository<expense, Long> {
              @Param("month") int month,
              @Param("date") int date
      );
+
+     @Query("SELECT SUM(e.amount) FROM expense e WHERE e.user.id = :userId AND e.date >= :startDate AND e.date <= :endDate")
+     Optional<Double> findTotalExpenseByUserAndDateRange(
+             @Param("userId") long userId,
+             @Param("startDate") String startDate,
+             @Param("endDate") String endDate);
 
 
 }

@@ -95,6 +95,25 @@ public class homecontroler {
         List<CategoryPercentageDTO> percentages = transactionService.getCategoryBreakdown(user_id, year, month, date);
         return ResponseEntity.ok(percentages);
     }
+    @GetMapping("/expenseinperiod")
+    public ResponseEntity<Map<String, Double>> getTotalExpense(
+            @RequestParam("user_id") long user_id,
+            @RequestParam ("start_date")String start_date,
+            @RequestParam ("end_date") String end_date) {
+        try {
+
+            // Calculate the total expense
+            double totalExpense = expenseService.calculateTotalExpense(user_id, start_date, end_date);
+
+            // Prepare response
+            Map<String, Double> response = new HashMap<>();
+            response.put("totalExpense", totalExpense);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
 
 
 }

@@ -14,4 +14,6 @@ public class BudgetService {
     public void setBudget(Long id, Date start_date,Date end_date,Long amount){
         budgetRepository.insertBudget(id,start_date,end_date,amount);
     }
+
+
 }

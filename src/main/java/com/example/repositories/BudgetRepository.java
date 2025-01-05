@@ -15,4 +15,13 @@ public interface BudgetRepository extends JpaRepository<Budget, Long> {
     @Transactional
     @Query(value = "INSERT INTO budget (start_date, end_date, id, amount) VALUES (:start_date, :end_date, :id,:amount)", nativeQuery = true)
     void insertBudget(@Param("id") Long id, @Param("start_date") Date startDate, @Param("end_date") Date endDate ,@Param("amount") long amount);
+
+    @Modifying
+    @Transactional
+    @Query(value = "delete from budget where id=:user_id",nativeQuery = true)
+   int  deletebudgetByid(@Param("user_id") Long user_id);
+
+    @Query(value = "SELECT count(*) from budget  WHERE id =:user_id", nativeQuery = true)
+    int existId(@Param("user_id") Long userId);
+
 }

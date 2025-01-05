@@ -21,20 +21,37 @@
               })
               .catch((error) => { console.error('There was a problem with your fetch operation:', error); });
               }
-               function showFilters() {
-                          const filters = document.getElementById('filters');
-                          const submitBtn = document.getElementById('submit-btn');
-                          filters.style.display = 'flex';
-                          submitBtn.style.display = 'block';
-                      }
 
-                       function TshowFilters() {
-                                                const Tfilters = document.getElementById('table-filters');
-                                                const TsubmitBtn = document.getElementById('Tsubmit-btn');
-                                                Tfilters.style.display = 'flex';
-                                                TsubmitBtn.style.display = 'block';
-                                            }
+function showFilters() {
+    const filters = document.getElementById('filters');
 
+    // Check current display status and toggle
+    if (filters.style.display === 'none' || filters.style.display === '') {
+        filters.style.display = 'flex'; // Show filters
+    } else {
+        filters.style.display = 'none'; // Hide filters
+    }
+}
+
+
+
+
+
+  function TshowFilters() {
+      const filters = document.getElementById('table-filters');
+
+      // Check current display status and toggle
+      if (filters.style.display === 'none' || filters.style.display === '') {
+          filters.style.display = 'flex'; // Show filters
+      } else {
+          filters.style.display = 'none'; // Hide filters
+      }
+  }
+//
+//  function filterDashboard() {
+//      // Your filter logic goes here
+//      console.log('Filtering dashboard...');
+//  }
 
 
         function filterTable(){

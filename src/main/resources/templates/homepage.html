@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Chart.js CDN for Graphs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable"></script>
+
+
 
 </head>
 <body>
@@ -17,17 +22,47 @@
     <h1>Advanced Personal Money Management</h1>
 </header>
 
-<!-- Navigation Bar -->
+<div class="nav-wrapper">
 <nav>
-    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-    <a href="incomexpens.html"><i class="fas fa-wallet"></i>Income & Expense</a>
-    <a href="BUDGET.HTML"><i class="fas fa-file-invoice-dollar"></i>Budget Planner</a>
-    <a href="goal.html"><i class="fas fa-bullseye"></i>Financial Goals</a>
-    <a href="report.html"><i class="fas fa-chart-bar"></i>Reports</a>
-    <a href="settings.html"><i class="fas fa-cog"></i>Settings</a>
+    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="incomexpens.html"><i class="fas fa-wallet"></i> Income & Expense</a>
+    <a href="BUDGET.HTML"><i class="fas fa-file-invoice-dollar"></i> Budget Planner</a>
+    <a href="goal.html"><i class="fas fa-bullseye"></i> Financial Goals</a>
+    <a href="report.html"><i class="fas fa-chart-bar"></i> Reports</a>
+    <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+    <a href="settings.html"><i class="fas fa-bell icon"></i> Notification</a>
 </nav>
 
-<!-- Main Content -->
+<!-- Dropdown Container -->
+    <div class="dropdown-container">
+        <div class="profile-button" onclick="toggleDropdown()">
+            <div class="avatar" style="background-color: #28a745; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                <i class="fas fa-user icon"></i>
+            </div>
+            <span th:text="${name}"></span>
+            <i class="fas fa-chevron-down dropdown-icon"></i>
+        </div>
+
+        <!-- Dropdown menu -->
+        <div class="dropdown-menu" id="dropdownMenu">
+            <div class="user-info">
+                <p><i class="fas fa-user"></i> User Id:
+                <span th:text="${user_id}"></span></p>
+            </div>
+            <div class="user-info">
+                <p><strong>User Name:</strong></p>
+                <span th:text="${name}"></span>
+            </div>
+            <hr>
+            <a href="#"><i class="fas fa-cog"></i> Settings</a>
+            <a href="#" class="change-password"><i class="fas fa-key"></i> Change Password</a>
+            <hr>
+            <a href="http://localhost:8080/" class="logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+
+
+</div>
 
 
 <div class="container">
@@ -42,7 +77,8 @@
             <div class="card">
                 <i class="fas fa-coins"></i>
                 <h3>Total Income</h3>
-                <p id="total-income"></p>
+               <p id="total-income"></p>
+
             </div>
             <div class="card">
                 <i class="fas fa-credit-card"></i>
@@ -78,16 +114,7 @@
                 <canvas id="expenseChart" width="250" height="200"></canvas>
             </div>
         </div>
-<!--        // srabon filter-->
 
-<!--        <div class="filter">-->
-<!--            <label for="filter-year">Year: </label>-->
-<!--            <input type="number" id="Dasboard-filter-year" placeholder="YYYY" oninput="filterDashboard()" >-->
-<!--            <label for="filter-month">Month: </label>-->
-<!--            <input type="number" id="Dasboard-filter-month" placeholder="MM" oninput="filterDashboard()" >-->
-<!--            <label for="filter-date">Date: </label>-->
-<!--            <input type="number" id="Dasboard-filter-date" placeholder="DD" oninput="filterDashboard()" >-->
-<!--        </div> -->
 
 
 <!--        // amr Filter-->
@@ -99,23 +126,21 @@
             </div>
 
             <!-- Advanced Filters -->
-            <div class="advanced-filters" id="filters">
+            <div class="advanced-filters" id="filters" style="display: none;">
                 <div class="input-group">
                     <label for="filter-year">Year:</label>
-                    <input type="number" id="Dasboard-filter-year" placeholder="YYYY"  oninput="filterDashboard()">
+                    <input type="number"  min="2024"  step="1" id="Dasboard-filter-year" placeholder="YYYY"  oninput="filterDashboard()">
                 </div>
                 <div class="input-group">
                     <label for="filter-month">Month:</label>
-                    <input type="number" id="Dasboard-filter-month" placeholder="MM"  oninput="filterDashboard()">
+                    <input type="number"  min="1" max="12" step="1" id="Dasboard-filter-month" placeholder="MM"  oninput="filterDashboard()">
                 </div>
                 <div class="input-group">
                     <label for="filter-date">Date:</label>
-                    <input type="number" id="Dasboard-filter-date" placeholder="DD" oninput="filterDashboard()">
+                    <input type="number"  min="1" max="31" step="1"id="Dasboard-filter-date" placeholder="DD" oninput="filterDashboard()">
                 </div>
             </div>
 
-            <!-- Submit Button -->
-            <button class="submit-btn" id="submit-btn" onclick="submitSearch()">Submit</button>
         </div>
 
 <!--    </section>-->
@@ -165,67 +190,37 @@
     <!-- Reports Section -->
     <section id="reports" class="section">
         <h2>Generated Report</h2>
-        <div>
-            <!-- Financial Goal, Budget and Remaining Budget -->
-            <div class="financial-goal">
-                <label for="financial-goal">Set Financial Goal (in Currency): </label>
-                <input type="number" id="financial-goal" placeholder="Enter your goal" onchange="updateGoal()">
-                <p id="goal-status">Goal Status: Not Set</p>
-            </div>
 
-            <div class="budget">
-                <label for="budget">Set Monthly Budget: </label>
-                <input type="number" id="budget" placeholder="Enter your budget" onchange="updateBudget()">
-                <p id="remaining-budget">Remaining Budget: Not Set</p>
-            </div>
 
-<!--            Srabon code-->
-<!--             Calendar Filter-->
-<!--            <div class="filter">-->
-<!--                <label for="filter-year">Year: </label>-->
-<!--                <input type="number" id="filter-year" placeholder="YYYY" oninput="filterTable()">-->
-<!--                <label for="filter-month">Month: </label>-->
-<!--                <input type="number" id="filter-month" placeholder="MM" oninput="filterTable()">-->
-<!--                <label for="filter-date">Date: </label>-->
-<!--                <input type="number" id="filter-date" placeholder="DD" oninput="filterTable()">-->
-<!--            </div>-->
-<!--            amr code-->
 
-            <div class="search-container">
+
+            <div class="Tsearch-container">
                 <!-- Search Bar -->
-                <div class="search-bar">
+                <div class="Tsearch-bar">
 
                     <button onclick="TshowFilters()">
-                        <i class="fas fa-search"></i> Search
+                        <i class="fas fa-search" style="none"></i> Search
                     </button>
                 </div>
 
 <!--                &lt;!&ndash; Advanced Filters &ndash;&gt;-->
                 <div class="table-advanced-filters" id="table-filters">
-                    <div class="input-group">
+                    <div class="Tinput-group">
                         <label for="filter-year">Year:</label>
-                        <input type="number" id="filter-year" placeholder="YYYY" oninput="filterTable()">
+                        <input type="number"  min="2024"  step="1" id="filter-year" placeholder="YYYY" oninput="filterTable()">
                     </div>
-                    <div class="input-group">
+                    <div class="Tinput-group">
                         <label for="filter-month">Month:</label>
-                        <input type="number" id="filter-month" placeholder="MM" oninput="filterTable()">
+                        <input type="number"  min="1" max="12" step="1" id="filter-month" placeholder="MM" oninput="filterTable()">
                     </div>
-                    <div class="input-group">
+                    <div class="Tinput-group">
                         <label for="filter-date">Date:</label>
-                        <input type="number" id="filter-date" placeholder="DD" oninput="filterTable()">
+                        <input type="number"  min="1" max="31" step="1" id="filter-date" placeholder="DD" oninput="filterTable()">
                     </div>
                 </div>
-
-<!--                &lt;!&ndash; Submit Button &ndash;&gt;-->
-<!--                <button class="submit-btn" id="Tsubmit-btn" onclick="submitSearch()">-->
-<!--                    Submit-->
-<!--                </button>-->
             </div>
 
-
-
-
-            <table id="report-table" border="1" cellpadding="8" cellspacing="0">
+        <table id="report-table" border="1" cellpadding="8" cellspacing="0">
                 <thead>
                 <tr>
                     <th>Date</th>
@@ -239,11 +234,65 @@
 
                 </tbody>
             </table>
-        </div>
+
+
         <button onclick="downloadReport()">Download Report</button>
     </section>
 
-    <!-- Settings Section -->
+
+<!--       Budget planar-->
+
+
+        <div class="budget-planner-container">
+            <h1>Set Your Budget</h1>
+            <form id="budgetForm">
+
+                <div class="form-group">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="budgetAmount">Enter Budget Amount (৳):</label>
+                    <input type="number" id="budgetAmount" placeholder="Enter amount" min="0" required>
+                </div>
+                <button type="submit" class="submit-btn">Set Budget</button>
+            </form>
+        </div>
+
+
+
+        <!--        Financial Goal-->
+
+        <div class="goalcontainer">
+            <h1>Financial Goal Tracker</h1>
+            <form id="goal-form">
+                <label for="goal-name">Goal Name:</label>
+                <input type="text" id="goal-name" placeholder="e.g., Buy a new car" required>
+
+                <label for="goal-amount">Goal Amount:</label>
+                <input type="number" id="goal-amount" placeholder="e.g., 20000" required>
+
+                <button type="submit" >Set Goal</button>
+            </form>
+
+            <div id="goal-display" style="display: none;">
+                <h2>Your Financial Goal</h2>
+                <p id="display-goal-name"></p>
+                <p id="display-goal-amount"></p>
+                <p id="goal"></p>
+                <p id="display-progress"></p>
+                <div id="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+
+
+            <!-- Settings Section -->
     <section id="settings" class="section">
         <h2>Settings</h2>
         <p>Manage your account settings and preferences here.</p>
@@ -259,6 +308,71 @@
                 <option value="GBP">£ GBP</option>
             </select>
         </div>
+        <script>
+            document.getElementById("goal-form").addEventListener("submit", function (event) {
+              event.preventDefault();
+
+              // Get user input
+              const goalName = document.getElementById("goal-name").value;
+              const goalAmount = parseFloat(document.getElementById("goal-amount").value);
+
+              if (!goalName || !goalAmount || goalAmount <= 0) {
+                alert("Please enter valid details for your goal.");
+                return;
+              }
+
+              // Save goal details in localStorage
+              const goalData = {
+                name: goalName,
+                amount: goalAmount,
+                savedAmount: 1047958, // Start with zero savings
+              };
+              localStorage.setItem("financialGoal", JSON.stringify(goalData));
+
+              // Display the goal details
+              displayGoal();
+            });
+
+            function displayGoal() {
+              const goalData = JSON.parse(localStorage.getItem("financialGoal"));
+              if (!goalData) return;
+
+              document.getElementById("goal-display").style.display = "block";
+              document.getElementById("display-goal-name").textContent = `Goal: ${goalData.name}`;
+              document.getElementById("display-goal-amount").textContent = `Target Amount: ৳${goalData.amount}`;
+              updateProgressBar(goalData.savedAmount, goalData.amount);
+            }
+
+            function updateProgressBar(savedAmount, goalAmount) {
+              const progressBar = document.getElementById("progress-bar");
+              const percentage = Math.min(( savedAmount/goalAmount) * 100, 100).toFixed(2);
+
+              // Update progress bar width
+              progressBar.style.width = `${percentage}%`;
+
+              // Update progress text
+              const progressText = percentage >= 100 ?
+                "Goal Achieved! 🎉" :
+                `${percentage}% saved towards your goal.`;
+
+              document.getElementById("display-progress").textContent = progressText;
+            }
+
+            // Simulate adding savings (for demonstration)
+            function addSavings(amount) {
+              const goalData = JSON.parse(localStorage.getItem("financialGoal"));
+              if (!goalData) return;
+
+              goalData.savedAmount += amount; // Add to the saved amount
+              localStorage.setItem("financialGoal", JSON.stringify(goalData)); // Update localStorage
+              displayGoal(); // Refresh the display
+            }
+
+
+            // Initialize display on page load
+            displayGoal();
+        </script>
+
 
         <!-- Theme Selection -->
         <div class="setting-option">
@@ -269,11 +383,7 @@
             </select>
         </div>
 
-        <!-- Notification Preference -->
-        <div class="setting-option">
-            <label for="notifications"><i class="fas fa-bell"></i> Enable Notifications</label>
-            <input type="checkbox" id="notifications" onchange="toggleNotifications()">
-        </div>
+
 
         <!-- Language Selection -->
         <div class="setting-option">
@@ -285,6 +395,14 @@
                 <option value="fr">Français</option>
             </select>
         </div>
+
+        <!-- Noti Preference -->
+        <div class="setting-option">
+            <label for="notifications"><i class="fas fa-bell"></i> Enable Notifications</label>
+            <input type="checkbox" id="notifications" onchange="toggleNotifications()">
+        </div>
+
+
     </section>
     </section>
 </div>
@@ -297,6 +415,9 @@
 <script src="/Home.js"></script>
 <script src="/chart.js"></script>
 <script src="/filter.js"> </script>
+<script src="/dropdown.js"> </script>
+<script src="/homepagetrip.js"> </script>
+<script src="/budget.js"> </script>
 <!--<script src="../static/Home.js"></script>-->
 
 </body>

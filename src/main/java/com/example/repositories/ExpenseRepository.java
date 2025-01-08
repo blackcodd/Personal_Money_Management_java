@@ -81,5 +81,8 @@ public interface ExpenseRepository extends JpaRepository<expense, Long> {
              @Param("startDate") String startDate,
              @Param("endDate") String endDate);
 
+     @Query(value = "select sum(amount) from expense where user_id=:id and date<= :end_date and date>=:end_date",nativeQuery = true)
+      Double ExpenseInPeriod(@Param("id") Long id,@Param("start_date") String start_date ,@Param("end_date") String end_date);
+
 
 }

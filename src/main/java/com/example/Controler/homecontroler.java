@@ -83,6 +83,7 @@ public class homecontroler {
             @RequestParam(required = false) Integer year,
             @RequestParam(required = false) Integer month,
             @RequestParam(required = false) Integer date) {
+        System.out.println("query te asteche"+user_id);
         IncomeExpenseDTO incomeExpenseDTO=transactionService.calculateTotals(user_id, year, month, date);
         return ResponseEntity.ok(incomeExpenseDTO);
     }

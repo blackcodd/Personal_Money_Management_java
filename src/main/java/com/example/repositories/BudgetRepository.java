@@ -14,7 +14,8 @@ public interface BudgetRepository extends JpaRepository<Budget, Long> {
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO budget (start_date, end_date, id, amount) VALUES (:start_date, :end_date, :id,:amount)", nativeQuery = true)
-    void insertBudget(@Param("id") Long id, @Param("start_date") Date startDate, @Param("end_date") Date endDate ,@Param("amount") long amount);
+    void insertBudget(@Param("id") Long id, @Param("start_date") String startDate, @Param("end_date") String endDate ,@Param("amount") Double amount);
+
 
     @Modifying
     @Transactional

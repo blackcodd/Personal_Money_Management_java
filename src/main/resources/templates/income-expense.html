@@ -1,0 +1,39 @@
+<section id="income-expense" class="section input-section">
+    <h2>Income & Expense Tracker</h2>
+    <form onsubmit="addTransaction(); return false;">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+
+        <label for="type">Type</label>
+        <select id="type">
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+        </select>
+        <label for="media">Media</label>
+        <select id="media" onchange="checkMedia()">
+            <option value="bkash">Bkash</option>
+            <option value="nagad">Nagad</option>
+            <option value="cash">Cash</option>
+            <option value="bank">Bank</option>
+            <option value="other">Others</option>
+        </select>
+
+        <input type="text" id="other_media" style="display:none;" placeholder="Enter others Media">
+
+        <label for="category">Category</label>
+        <select id="category" onchange="checkCategory()">
+            <option value="salary">Salary</option>
+            <option value="business_profit">Business_Profit</option>
+            <option value="business_loss">Business_loss</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="groceries">Groceries</option>
+            <option value="transport">Transport</option>
+            <option value="others">Others</option>
+        </select>
+        <input type="text" id="other-category" style="display:none;" placeholder="Enter other category">
+
+        <label for="date">Date</label>
+        <input type="date" id="date">
+        <button type="submit">Add Transaction</button>
+    </form>
+</section>

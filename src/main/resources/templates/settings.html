@@ -1,0 +1,45 @@
+
+<section id="settings" class="section">
+    <h2>Settings</h2>
+    <p>Manage your account settings and preferences here.</p>
+
+    <!-- Currency Selection -->
+    <div class="setting-option">
+        <label for="currency"><i class="fas fa-money-bill"></i> Select Currency</label>
+        <select id="currency" onchange="changeCurrency()">
+            <option value="TAKA">৳ TAKA</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+            <option value="INR">₹ INR</option>
+            <option value="GBP">£ GBP</option>
+        </select>
+    </div>
+
+    <!-- Theme Selection -->
+    <div class="setting-option">
+        <label for="theme"><i class="fas fa-palette"></i> Choose Theme</label>
+        <select id="theme" onchange="changeTheme()">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+        </select>
+    </div>
+
+    <!-- Notification Preference -->
+    <div class="setting-option">
+        <label for="notifications"><i class="fas fa-bell"></i> Enable Notifications</label>
+        <input type="checkbox" id="notifications" onchange="toggleNotifications()">
+    </div>
+
+    <!-- Language Selection -->
+    <div class="setting-option">
+        <label for="language"><i class="fas fa-language"></i> Preferred Language</label>
+        <select id="language" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="bn">বাংলা (Bangla)</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+        </select>
+    </div>
+</section>
+
+

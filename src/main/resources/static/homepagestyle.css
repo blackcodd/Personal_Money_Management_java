@@ -104,6 +104,12 @@ body {
       padding: 10px 0;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+  #navigation a.active {
+      color: #fff; /* Highlighted text color */
+      background-color: #007bff; /* Highlighted background color */
+      border-radius: 5px; /* Optional: rounded corners */
+      padding: 5px 10px; /* Optional: spacing for better visibility */
+  }
 
     nav a {
       float: left;

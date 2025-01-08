@@ -1,5 +1,5 @@
     var userId = document.getElementById("logged-in-user-id").value;
-            console.log(`UserId: ${userId}`);
+            console.log(`chart UserId: ${userId}`);
             let myChart;
             let incomePieChart;
             let expensePieChart;
@@ -124,25 +124,26 @@ console.log('Pie chart data:', data);
     createOrUpdatePieChart('incomeChart', incomeData, 'Income Breakdown', incomePieChart, chart => (incomePieChart = chart));
     createOrUpdatePieChart('expenseChart', expenseData, 'Expense Breakdown', expensePieChart, chart => (expensePieChart = chart));
 }
-
 function createOrUpdatePieChart(canvasId, data, label, chartInstance, setChartInstance) {
     const ctx = document.getElementById(canvasId).getContext('2d');
     if (!ctx) {
-           console.error(`Canvas with ID "${canvasId}" not found.`);
-           return;
-       }
+        console.error(`Canvas with ID "${canvasId}" not found.`);
+        return;
+    }
     if (chartInstance) {
         chartInstance.destroy();
     }
-// this is the chirt
+
+    // Generate dynamic colors for each category
+    const backgroundColors = data.map(() => `#${Math.floor(Math.random()*16777215).toString(16)}`);
 
     const newChart = new Chart(ctx, {
         type: 'pie',
         data: {
             labels: data.map(item => item.category),
             datasets: [{
-                data: data.map(item => item.percentage),
-                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'], // Adjust colors as needed
+                data: data.map(item => item.percentage.toFixed(2)),
+                backgroundColor: backgroundColors,
             }],
         },
         options: {
@@ -155,12 +156,73 @@ function createOrUpdatePieChart(canvasId, data, label, chartInstance, setChartIn
                     display: true,
                     text: label,
                 },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.raw || '';
+                            return `${value}%`;
+                        }
+                    }
+                },
+                datalabels: {
+                    color: '#00000',
+                    formatter: (value) => {
+                        return `${value}%`;
+                    },
+                    font: {
+                        weight: 'bold'
+                    },
+                  // align: 'end',
+                   // anchor: 'end',
+                    clamp: true, // Ensure labels are within the segment boundaries
+                    offset: 10 // Adjust to increase spacing of labels from segments
+                }
             },
         },
+        plugins: [ChartDataLabels],
     });
 
     setChartInstance(newChart);
+
+
+
+
+
+
+//function createOrUpdatePieChart(canvasId, data, label, chartInstance, setChartInstance) {
+//    const ctx = document.getElementById(canvasId).getContext('2d');
+//    if (!ctx) {
+//           console.error(`Canvas with ID "${canvasId}" not found.`);
+//           return;
+//       }
+//    if (chartInstance) {
+//        chartInstance.destroy();
+//    }
+//// this is the chirt
+//
+//    const newChart = new Chart(ctx, {
+//        type: 'pie',
+//        data: {
+//            labels: data.map(item => item.category),
+//            datasets: [{
+//                data: data.map(item => item.percentage),
+//                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'], // Adjust colors as needed
+//            }],
+//        },
+//        options: {
+//            responsive: true,
+//            plugins: {
+//                legend: {
+//                    position: 'top',
+//                },
+//                title: {
+//                    display: true,
+//                    text: label,
+//                },
+//            },
+//        },
+//    });
+//
+//    setChartInstance(newChart);
 }
-
-
-

@@ -26,22 +26,22 @@ public class logincontroller {
         mav.addObject("user", new user());
         return mav;
     }
-//    @GetMapping("/fuserid")
-//    public ResponseEntity<Long> logieduser(@RequestParam String name, @RequestParam String password) {
-//        try {
-//            user authenticatedUser =  new user();
-//            authenticatedUser=  userservice.log(name, password);
-//            if (authenticatedUser != null) {
-//                return ResponseEntity.ok(authenticatedUser.getId());
-//            } else {
-//                System.out.println("User with this id and password not found");
-//                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-//        }
-//    }
+    @GetMapping("/fuserid")
+    public ResponseEntity<Long> logieduser(@RequestParam String name, @RequestParam String password) {
+        try {
+            user authenticatedUser =  new user();
+            authenticatedUser=  userservice.log(name, password);
+            if (authenticatedUser != null) {
+                return ResponseEntity.ok(authenticatedUser.getId());
+            } else {
+                System.out.println("User with this id and password not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
     @PostMapping ("/login")
     public String login(@ModelAttribute("user") user user, Model model) {
         user autonicateUser = userservice.log(user.getName(), user.getPassword());

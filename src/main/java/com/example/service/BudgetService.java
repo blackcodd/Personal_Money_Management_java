@@ -11,7 +11,7 @@ public class BudgetService {
     @Autowired
     private BudgetRepository budgetRepository;
 
-    public void setBudget(Long id, Date start_date,Date end_date,Long amount){
+    public void setBudget(Long id, String start_date,String end_date,Double amount){
         budgetRepository.insertBudget(id,start_date,end_date,amount);
     }
 

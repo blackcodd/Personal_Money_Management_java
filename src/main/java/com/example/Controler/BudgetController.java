@@ -24,8 +24,8 @@ public class BudgetController {
     @PostMapping("/setbudget")
     public ResponseEntity<String> setBudget(
             @RequestParam("id") Long id,
-            @RequestParam("start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-            @RequestParam("end_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate, @RequestParam("amount") Long amount)
+            @RequestParam("start_date") @DateTimeFormat(pattern = "yyyy-MM-dd") String startDate,
+            @RequestParam("end_date") @DateTimeFormat(pattern = "yyyy-MM-dd") String endDate, @RequestParam("amount") double amount)
    {
         try {
             budgetService.setBudget(id, startDate, endDate,amount);

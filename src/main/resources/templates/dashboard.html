@@ -1,0 +1,124 @@
+    <section id="dashboard" class="section">
+        <h2>Dashboard Overview</h2>
+        <div class="dashboard">
+            <div class="card">
+                <i class="fas fa-coins"></i>
+                <h3>Total Income</h3>
+                <p id="total-income"> </p>
+            </div>
+            <div class="card">
+                <i class="fas fa-credit-card"></i>
+                <h3>Total Expenses</h3>
+                <p id="total-expenses"></p>
+            </div>
+            <div class="card">
+                <i class="fas fa-piggy-bank"></i>
+
+                <h3>Current Savings</h3>
+                <p id="current-savings"></p>
+            </div>
+            <!--chart-->
+        </div>
+        <div class="chart-container">
+            <!-- Combined Income-Expense-Savings Chart -->
+            <div class="chart-box">
+                <h3>Combined Chart</h3>
+                <canvas id="income-expense-savings-chart" width="300" height="250"></canvas>
+            </div>
+
+            <!-- Income Chart -->
+            <div class="chart-box">
+                <i class="fas fa-coins"></i>
+                <h3>Income Breakdown</h3>
+                <canvas id="incomeChart" width="250" height="200"></canvas>
+            </div>
+
+            <!-- Expense Chart -->
+            <div class="chart-box">
+                <i class="fas fa-credit-card"></i>
+                <h3>Expense Breakdown</h3>
+                <canvas id="expenseChart" width="250" height="200"></canvas>
+            </div>
+        </div>
+
+
+        <div class="search-container">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <button onclick="showFilters()"><i class="fas fa-search"></i> Search</button>
+            </div>
+
+            <!-- Advanced Filters -->
+            <div class="advanced-filters" id="filters">
+                <div class="input-group">
+                    <label for="filter-year">Year:</label>
+                    <input type="number" id="Dasboard-filter-year" placeholder="YYYY"  oninput="filterDashboard()">
+                </div>
+                <div class="input-group">
+                    <label for="filter-month">Month:</label>
+                    <input type="number" id="Dasboard-filter-month" placeholder="MM"  oninput="filterDashboard()">
+                </div>
+                <div class="input-group">
+                    <label for="filter-date">Date:</label>
+                    <input type="number" id="Dasboard-filter-date" placeholder="DD" oninput="filterDashboard()">
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button class="submit-btn" id="submit-btn" onclick="submitSearch()">Submit</button>
+        </div>
+
+    </section>
+
+
+    <section id="reports" class="section">
+        <h2>Generated Report</h2>
+        <div>
+
+            <div class="search-container">
+                <!-- Search Bar -->
+                <div class="search-bar">
+
+                    <button onclick="TshowFilters()">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+
+
+                <div class="table-advanced-filters" id="table-filters">
+                    <div class="input-group">
+                        <label for="filter-year">Year:</label>
+                        <input type="number" id="filter-year" placeholder="YYYY" oninput="filterTable()">
+                    </div>
+                    <div class="input-group">
+                        <label for="filter-month">Month:</label>
+                        <input type="number" id="filter-month" placeholder="MM" oninput="filterTable()">
+                    </div>
+                    <div class="input-group">
+                        <label for="filter-date">Date:</label>
+                        <input type="number" id="filter-date" placeholder="DD" oninput="filterTable()">
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <table id="report-table" border="1" cellpadding="8" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Media</th>
+                </tr>
+                </thead>
+                <tbody id="report-table-body">
+
+                </tbody>
+            </table>
+        </div>
+        <button onclick="downloadReport()">Download Report</button>
+    </section>
+    <!-- Content will be dynamically loaded here -->

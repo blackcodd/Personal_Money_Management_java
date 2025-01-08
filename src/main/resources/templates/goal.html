@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Personal Money Management</title>
+  <link rel="stylesheet" href="/homepagestyle.css">
+  <!-- Font Awesome CDN for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Chart.js CDN for Graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<body>
+<!-- Header -->
+<header>
+  <h1>Advanced Personal Money Management</h1>
+</header>
+
+
+<input type="hidden" id="logged-in-user-id" th:value="${user_id}" data-user-id="${user_id}"/>
+<p> userid:<span th:text="${user_id}"></span></p>
+<p id="amar"></p>
+
+<div class="financial-goal">
+  <label for="financial-goal">Set Financial Goal (in Currency): </label>
+  <input type="number" id="financial-goal" placeholder="Enter your goal" onchange="updateGoal()">
+  <p id="goal-status">Goal Status: Not Set</p>
+</div>
+</body>
+</html>

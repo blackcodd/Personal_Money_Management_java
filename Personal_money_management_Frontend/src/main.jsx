@@ -2,7 +2,8 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
-const API = '';
+// Direct Railway Backend URL
+const API = 'https://personalmoneymanagementjava-production.up.railway.app';
 const storedSession = () => JSON.parse(localStorage.getItem('use-session') || 'null');
 
 async function request(path, options = {}) {
@@ -110,7 +111,6 @@ function Dashboard({ onNavigate }) {
   const [period, setPeriod] = useState({ year: '', month: '', date: '' });
   const [error, setError] = useState('');
 
-  // Fixed: Load function wrapped in useCallback to prevent memory leaks and ensure reload on tab click
   const load = useCallback(async () => {
     setError('');
     try {

@@ -15,6 +15,7 @@ FROM nginx:alpine
 
 # Vite Build-এর আউটপুট (dist) Nginx-এর ওয়েব ফোল্ডারে কপি করা
 COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
